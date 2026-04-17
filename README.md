@@ -11,6 +11,11 @@ Second attempt at creating a bulk file renamer program intended to be easier to 
 3. *Files get automatically renamed*
 
 ---
+### Ideas:
+- Add prefix add option that allows the specified value to be inserted at the front of every file in a folder
+- Add sufix add option that allows the specified value to be inserted at the end of every file in a folder
+
+---
 ### Arguments:
 - `--help`: (Optional) Lists all program arguments
 - `--test`: (Optional) Declair if the application should run in test mode [0 -> production (default) | 1 -> test mode].

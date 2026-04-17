@@ -9,6 +9,7 @@ File:
 
 import argparse, glob, os, sys
 from arg_processor import process_args
+from rename import rename_files, rename_directories
 
 
 def main():
@@ -19,7 +20,7 @@ def main():
   # Default file type
   file_type = ""
   # Default directory location
-  directory = "./"
+  directory = ".\\"
 
   target_phrase_help_text = """
     (Required) Target prhase for removal. Example: `-tg changeThis`\n
@@ -89,9 +90,12 @@ def main():
   if arguments["file_type"] == "directory":
     print("directory specified")
   else:
+    # collects list of all files with the desired extention in the specified directory
     target_files = glob.glob(arguments["directory"] + "\\*." + arguments["file_type"])
-    print(arguments)
-    print(target_files)
+    # function renames and returns each file in `target_files`
+    rename_files(arguments, target_files)
+    # print(arguments)
+    # print(target_files)
 
 
 
