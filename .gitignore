@@ -3,6 +3,7 @@
 *.jpeg
 *.jpg
 *.gif
+rename*/
 
 
 # Byte-compiled / optimized / DLL files
