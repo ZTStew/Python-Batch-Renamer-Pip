@@ -1,7 +1,5 @@
 # Python Batch Renamer (Pip)
 ---
-## Description:
-Program takes in user input and batch renames all files in the current folder based on the given arguments
 
 Second attempt at creating a bulk file renamer program intended to be easier to edit and to be installed through the use of Pip.
 
@@ -16,7 +14,12 @@ Second attempt at creating a bulk file renamer program intended to be easier to 
 ### Arguments:
 - `--help`: (Optional) Lists all program arguments
 - `--test`: (Optional) Declair if the application should run in test mode [0 -> production (default) | 1 -> test mode].
-
+- `--target` || `--phrase`: (Required) Target prhase for removal. Example: `-tg changeThis`
+- `--new`: (Required) Value replacing target phrase. Example: `-nw changeTo`.
+  - To replace with nothing, type \"blank\".
+  - To replace with space, type \"space\".
+- `--file`: (Optional) Defines if Batch-Renamer should target a specific file type containing the target phrase instead of all files containing the the target phrase. Example: `-f mp4`.
+  - To batch rename folders/directories, type: `-f dir` or `-f folder`.
 
 ---
 ### Test Settings:
