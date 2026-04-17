@@ -5,15 +5,63 @@ Description:
 
 File:
   File takes user input and feeds it to the rest of the program
-
 """
 
-import glob, os, argparse
+import argparse, glob, os, sys
+
+def process_args(args):
+  output = {}
+
+  # targets program execution towards ./rename
+  if args.test == 1:
+    output["directory"] = "./rename"
+  else:
+    output["directory"] = "./"
+
+  if args.target:
+    if args.target.lower() == "space":
+      output["target"] = " "
+    else:
+      output["target"] = args.target
+  else:
+    output["error"] = "ERROR: Required field [target] not found."
+
+  if args.new: 
+    if args.new.lower() == "blank":
+      output["new"] = ""
+    if args.new.lower() == "space":
+      output["new"] = " "
+    else:
+      output["new"] = args.new
+  else:
+    output["error"] = "ERROR: Required field [new] not found."
+
+  if args.file:
+    output["file_type"] = args.file
+    output["file_type"] = output["file_type"].strip(".")
+  else:
+    output["file_type"] = "*"
+
+  return output
+
 
 
 def main():
+  # Default phrase
+  target_phrase = "test"
+  # Default new phrase
+  new_phrase = ""
+  # Default file type
+  file_type = ""
+  # Default directory location
+  directory = "./"
+
+  target_phrase_help_text = """
+    (Required) Target prhase for removal. Example: `-tg changeThis`\n
+    To replace with space, type \"space\".
+  """
   new_value_help_text = """
-    "(Required) Value replacing target phrase. Example: `-nw changeTo`".\n
+    (Required) Value replacing target phrase. Example: `-nw changeTo`.\n
     To replace with nothing, type \"blank\".\n
     To replace with space, type \"space\".
   """
@@ -38,7 +86,7 @@ def main():
     "-ph",
     "--phrase",
     type=str,
-    help="(Required) Target prhase for removal. Example: `-tg changeThis`"
+    help=target_phrase_help_text
   )
   # command line option for setting new string value
   args.add_argument(
@@ -55,9 +103,32 @@ def main():
     help=file_type_help_text
   )
 
+  # # gets `args` from command line
   args = args.parse_args()
 
-  print(args)
+  # print(args)
+
+  # # processes `args` and returns dictionary
+  arguments = process_args(args)
+  # print(arguments)
+
+  # kills program if an error is found in user input
+  try:
+    if arguments["error"]:
+      print(arguments["error"])
+      sys.exit()
+  except:
+    pass
+
+  # Collects all files in given directory with matching extension
+  input_files = glob.glob(arguments["directory"] + "/*." + arguments["file_type"])
+  print(input_files)
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
