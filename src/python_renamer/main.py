@@ -8,47 +8,7 @@ File:
 """
 
 import argparse, glob, os, sys
-
-def process_args(args):
-  output = {}
-
-  # targets program execution towards ./rename
-  if args.test == 1:
-    output["directory"] = "./rename"
-  else:
-    output["directory"] = "./"
-
-  if args.target:
-    if args.target.lower() == "space":
-      output["target"] = " "
-    else:
-      output["target"] = args.target
-  else:
-    output["error"] = "ERROR: Required field [target] not found."
-
-  if args.new: 
-    if args.new.lower() == "blank":
-      output["new"] = ""
-    if args.new.lower() == "space":
-      output["new"] = " "
-    else:
-      output["new"] = args.new
-  else:
-    output["error"] = "ERROR: Required field [new] not found."
-
-  if args.file:
-    # check to handle directories being the program target
-    if args.file.lower() == "dir" or  args.file.lower() == "folder":
-      output["file_type"] = "directory"
-    # check to handle files being the program target
-    else: 
-      output["file_type"] = args.file
-      output["file_type"] = output["file_type"].strip(".")
-  else:
-    output["file_type"] = "*"
-
-  return output
-
+from arg_processor import process_args
 
 
 def main():
@@ -129,8 +89,9 @@ def main():
   if arguments["file_type"] == "directory":
     print("directory specified")
   else:
-    input_files = glob.glob(arguments["directory"] + "/*." + arguments["file_type"])
-    print(input_files)
+    target_files = glob.glob(arguments["directory"] + "\\*." + arguments["file_type"])
+    print(arguments)
+    print(target_files)
 
 
 

@@ -1,3 +1,16 @@
+import os, sys
+from arguments import Arguments
+
+"""
+Arguments:
+  Phrase: String
+  Replace With: String
+  File Type: String
+"""
+
+arg = Arguments()
+errors = []
+
 print("Search Phrase: " + arg.phrase_to_remove)
 print("Prase Replace: " + arg.replace_with)
 print("File Type: " + arg.file_type)
