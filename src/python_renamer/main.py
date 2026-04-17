@@ -1,0 +1,64 @@
+
+"""
+Description:
+  Program takes user input to bulk rename files or folders in the given folder. Does not apply recursively
+
+File:
+  File takes user input and feeds it to the rest of the program
+
+"""
+
+import glob, os, argparse
+
+
+def main():
+  new_value_help_text = """
+    "(Required) Value replacing target phrase. Example: `-nw changeTo`".\n
+    To replace with nothing, type \"blank\".\n
+    To replace with space, type \"space\".
+  """
+  file_type_help_text = """
+    (Optional) Defines if Batch-Renamer should target a specific file type containing the target phrase 
+    instead of all files containing the the target phrase. Example: `-f mp4`.\n
+    To batch rename folders/directories, type: `-f dir` or `-f folder`.
+  """
+
+  args = argparse.ArgumentParser(description="Program searches given folder for video files and trims a specified number of seconds from the start or the end of the video. The file is then saved in a specified location.")
+  # command line option running program in "test" mode
+  args.add_argument(
+    "-t",
+    "--test",
+    type=int,
+    help="(Optional) Declair if the application should run in test mode [0 -> production (default) | 1 -> test mode]."
+  )
+  # command line option for setting the target string
+  args.add_argument(
+    "-tg",
+    "--target",
+    "-ph",
+    "--phrase",
+    type=str,
+    help="(Required) Target prhase for removal. Example: `-tg changeThis`"
+  )
+  # command line option for setting new string value
+  args.add_argument(
+    "-nw",
+    "--new",
+    type=str,
+    help=new_value_help_text
+  )
+  # command line option for specifying file type restriction
+  args.add_argument(
+    "-f",
+    "--file",
+    type=str,
+    help=file_type_help_text
+  )
+
+  args = args.parse_args()
+
+  print(args)
+
+
+if __name__ == "__main__":
+  main()
