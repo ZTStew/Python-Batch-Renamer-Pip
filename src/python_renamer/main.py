@@ -37,8 +37,13 @@ def process_args(args):
     output["error"] = "ERROR: Required field [new] not found."
 
   if args.file:
-    output["file_type"] = args.file
-    output["file_type"] = output["file_type"].strip(".")
+    # check to handle directories being the program target
+    if args.file.lower() == "dir" or  args.file.lower() == "folder":
+      output["file_type"] = "directory"
+    # check to handle files being the program target
+    else: 
+      output["file_type"] = args.file
+      output["file_type"] = output["file_type"].strip(".")
   else:
     output["file_type"] = "*"
 
@@ -68,7 +73,7 @@ def main():
   file_type_help_text = """
     (Optional) Defines if Batch-Renamer should target a specific file type containing the target phrase 
     instead of all files containing the the target phrase. Example: `-f mp4`.\n
-    To batch rename folders/directories, type: `-f dir` or `-f folder`.
+    To batch rename folders/directories instead, type: `-f dir` or `-f folder`.
   """
 
   args = argparse.ArgumentParser(description="Program searches given folder for video files and trims a specified number of seconds from the start or the end of the video. The file is then saved in a specified location.")
@@ -121,8 +126,11 @@ def main():
     pass
 
   # Collects all files in given directory with matching extension
-  input_files = glob.glob(arguments["directory"] + "/*." + arguments["file_type"])
-  print(input_files)
+  if arguments["file_type"] == "directory":
+    print("directory specified")
+  else:
+    input_files = glob.glob(arguments["directory"] + "/*." + arguments["file_type"])
+    print(input_files)
 
 
 
