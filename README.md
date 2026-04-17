@@ -23,7 +23,8 @@ Second attempt at creating a bulk file renamer program intended to be easier to 
 
 ---
 ### Test Settings:
-python reincrementor.py -t 1 -st 5 -f txt -d 3 -p pre -sf suf -sp _ -n 1
+python main.py -t 1 -tg test -nw tester -f mp3
+python main.py -t 1 -tg test -nw tester -f dir
 
 ---
 ### Program Installation:
