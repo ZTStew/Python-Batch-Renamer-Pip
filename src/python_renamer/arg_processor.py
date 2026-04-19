@@ -23,10 +23,10 @@ def process_args(args):
     output["error"] = "ERROR: Required field [target] not found."
 
   # handles new string parsing
-  if args.new: 
-    if args.new.lower() == "blank":
+  if args.new:
+    if "blank" in args.new.lower():
       output["new"] = ""
-    if args.new.lower() == "space":
+    elif "space" in args.new.lower():
       output["new"] = " "
     else:
       output["new"] = args.new
@@ -38,8 +38,8 @@ def process_args(args):
     # check to handle directories being the program target
     if args.file.lower() == "dir" or  args.file.lower() == "folder":
       output["file_type"] = "directory"
-    # check to handle files being the program target
-    else: 
+    # checks to handle file(s) being the program target
+    else:
       output["file_type"] = args.file
       output["file_type"] = output["file_type"].strip(".")
   else:

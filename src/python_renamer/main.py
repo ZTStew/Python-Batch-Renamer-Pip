@@ -68,15 +68,11 @@ def main():
     type=str,
     help=file_type_help_text
   )
-
-  # # gets `args` from command line
+  # gets `args` from command line
   args = args.parse_args()
-
-  # print(args)
 
   # # processes `args` and returns dictionary
   arguments = process_args(args)
-  # print(arguments)
 
   # kills program if an error is found in user input
   try:
@@ -92,16 +88,9 @@ def main():
   else:
     # collects list of all files with the desired extention in the specified directory
     target_files = glob.glob(arguments["directory"] + "\\*." + arguments["file_type"])
-    # function renames and returns each file in `target_files`
+
+    # function to rename each file in `target_files`
     rename_files(arguments, target_files)
-    # print(arguments)
-    # print(target_files)
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

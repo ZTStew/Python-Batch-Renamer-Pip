@@ -8,39 +8,54 @@ def rename_files(arguments, target_files):
 
   # loops through and seperates relavent variables from each file found
   for file_name in target_files:
-    print(file_name)
+    out = f"Renaming file: {file_name} --> "
+
     file = {}
+    # tracker for if a 'file[]' has been renamed
+    file['file_changed'] = False
     # removes path from `file_name`
     file['file_name'] = file_name.split("\\")[-1]
     file['file_name'] = file['file_name'].split("/")[-1]
-    # removes file type from file['file_name']
-    file['file_name'] = file['file_name'].split("." + arguments["file_type"])[0]
     # tracks file extention for reassembly
     file['file_type'] = file_name.split(".")[-1]
-
-    # !!! may not need to track !!!
+    # removes file type from file['file_name']
+    file['file_name'] = file['file_name'].split("." + file['file_type'])[0]
+    # tracks path to file being looked at
     file['file_path'] = os.path.dirname(file_name)
-
 
     # seperates file based on `target` value
     file['file_parts'] = file['file_name'].split(arguments['target'])
 
     file['file_name'] = ""
     i = 0
+    # reassembles file['file_name'] with user arguments
     while i < len(file['file_parts']):
       # re-adds non-targeted file name parts
       file['file_name'] += file['file_parts'][i]
 
-      i += 1
       # prevents new argument from being added to the end of the file
+      i += 1
+      # adds 'new' to file['file_name']
       if i < len(file['file_parts']):
         file['file_name'] += arguments["new"]
+        # flag for if the file has been changed
+        file['file_changed'] = True
 
-    file['file_name'] = file['file_name'].strip()
-    
-    print(file)
+    # ensures program only continues on `file` if something has changed 
+    if file['file_changed']:
+      file['file_name'] = file['file_name'].strip()
 
-    # os.rename(file_name, update_file)
+      # manually sets no directory to correct value
+      if file['file_path'] == ".":
+        file_full_path = ".\\"
+      else:
+        file_full_path = file['file_path'] + "\\"
+
+      file_full_path += file['file_name'] + "." + file['file_type']
+
+      # reports name change to user
+      print(out + file['file_name'] + "." + file['file_type'])
+      os.rename(file_name, file_full_path)
 
 
 
