@@ -8,8 +8,8 @@ File:
 """
 
 import argparse, glob, os, sys
-from arg_processor import process_args
-from rename import rename_files, rename_directories
+from .arg_processor import process_args
+from .rename import rename_files, rename_directories
 
 
 def main():
