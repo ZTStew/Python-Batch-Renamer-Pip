@@ -1,6 +1,7 @@
 
 import os
 
+# renames specificly files in given `target_files` list
 def rename_files(arguments, target_files):
   print("Target Phrase: " + arguments["target"])
   print("New Phrase: " + arguments["new"])
@@ -59,55 +60,35 @@ def rename_files(arguments, target_files):
 
 
 
-def rename_directories(arguments):
-  print(arguments)
-
-# # function removes "phrase_to_remove" from "phrase" and replaces it with "replace_with" and re-adds "file_type"
-# def remove_phrase(phrase, phrase_to_remove, replace_with, file_type):
-#   # cuts phrase based on phrase_to_remove
-#   cut = phrase.split(phrase_to_remove)
-#   out = ""
-
-#   # loops through cut and reconstructs new phrase
-#   val = 0
-#   while val < len(cut):
-#     # adds each index to out
-#     out += cut[val]
-
-#     val += 1
-#     # prevents replace_with from being added to the end of the phrase
-#     if val < len(cut):
-#       out += replace_with
-
-#   out = out.strip()
-
-#   out += "." + file_type
-
-#   return out
+# renames specificly directories in given `directories` list
+def rename_directories(arguments, directory_location, directories):
+  print("Target Phrase: " + arguments["target"])
+  print("New Phrase: " + arguments["new"])
+  print("File Type: " + arguments["file_type"])
 
 
-# # Itterates through all file_type files found in given directory
-# for input_file in arg.input_files:
-#   # Gitbash is unable to handle non-unicode symbols potentially crashing the program
-#   try:
-#     # removes file extension from input_file name
-#     renamed_file = input_file.split("." + arg.file_type)[0]
-#     # removes any trailing whitespaces
-#     renamed_file = renamed_file.strip()
-#     # removes file path from renamed_file
-#     renamed_file = os.path.basename(renamed_file)
+  # looks for directories containing 'target'
+  for directory in directories:
+    # tracker for user feedback
+    out = f"Renaming directory: {directory} --> "
 
-#     # checks if phrase_to_remove is found in file name 
-#     if arg.phrase_to_remove in renamed_file:
-#       # removes phrase
-#       update_file = remove_phrase(renamed_file, arg.phrase_to_remove, arg.replace_with, arg.file_type)
-#       # updates existing file with new name
-#       os.rename(input_file, update_file)
-#       print("Task completed: " + input_file + " -> " + update_file)
+    # checks if target phrase is in directory's name
+    if arguments["target"] in directory:
+      new_directory_name = ""
+      # splits directroy name into 'parts'
+      parts = directory.split(arguments["target"])
 
-#   except:
-#     errors.append(input_file)
+      part = 0
+      while part < len(parts):
+        # readds each part to 'new_directory_name'
+        new_directory_name += parts[part]
 
-# # Informs user there are errors that occured
-# if len(errors) > 0:
-#   print("ERRORS Detected: " + str(len(errors)))
+        # order prevents 'new' from being added at the end of all opperations
+        part += 1
+        # adds "new" to directory name
+        if part < len(parts):
+          new_directory_name += arguments["new"]
+
+      print(out + new_directory_name)
+      os.rename(directory_location[0] + "\\" + directory, directory_location[0] + "\\" + new_directory_name)
+

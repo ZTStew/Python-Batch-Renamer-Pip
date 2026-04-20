@@ -8,8 +8,12 @@ File:
 """
 
 import argparse, glob, os, sys
+# for pip production
 from .arg_processor import process_args
 from .rename import rename_files, rename_directories
+# for development
+# from arg_processor import process_args
+# from rename import rename_files, rename_directories
 
 
 def main():
@@ -32,7 +36,7 @@ def main():
     To replace with space, type \"space\".
   """
   file_type_help_text = """
-    (Optional) Defines if Batch-Renamer should target a specific file type containing the target phrase 
+    (Optional) [case sensitive] Defines if Batch-Renamer should target a specific file type containing the target phrase 
     instead of all files containing the the target phrase. Example: `-f mp4`.\n
     To batch rename folders/directories instead, type: `-f dir` or `-f folder`.
   """
@@ -82,15 +86,36 @@ def main():
   except:
     pass
 
-  # Collects all files in given directory with matching extension
+  # Collects all directories in a the current working directory
   if arguments["file_type"] == "directory":
-    print("directory specified")
+    if args.test:
+      # will fail if used outside of program folder. Oh well.
+      directory_location = glob.glob(os.getcwd() + "\\rename")
+    else:
+      directory_location = glob.glob(os.getcwd())
+
+    # generates list of directories
+    directories = []
+    for item in os.listdir(directory_location[0]):
+      # identifies if given `item` is a directory or not
+      # print(item + " --> " + str(os.path.isdir(directory_location[0] + "\\" + item)))
+      if os.path.isdir(directory_location[0] + "\\" + item):
+        directories.append(item)
+
+    # print(directories)
+
+    # function to rename each folder/directory matching arguments given
+    if len(directories) > 0:
+      rename_directories(arguments, directory_location, directories)
+
+  # Collects all files in given directory with matching extension
   else:
     # collects list of all files with the desired extention in the specified directory
     target_files = glob.glob(arguments["directory"] + "\\*." + arguments["file_type"])
 
     # function to rename each file in `target_files`
-    rename_files(arguments, target_files)
+    if len(target_files) > 0:
+      rename_files(arguments, target_files)
 
 
 if __name__ == "__main__":

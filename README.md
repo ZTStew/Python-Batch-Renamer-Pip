@@ -7,7 +7,7 @@ Second attempt at creating a bulk file renamer program intended to be easier to 
 ### Usage:
 (explanation of how to use the program)
 1. Navigate to desired folder in terminal
-2. Run `rename`
+2. Run `rename` || `renamer` || `p_rename` + required arguments
 3. *Files get automatically renamed*
 
 ---
@@ -28,6 +28,7 @@ Second attempt at creating a bulk file renamer program intended to be easier to 
 
 ---
 ### Test Settings:
+python main.py -t 1 -tg test -nw tester -f txt
 python main.py -t 1 -tg test -nw tester -f mp3
 python main.py -t 1 -tg test -nw tester -f dir
 

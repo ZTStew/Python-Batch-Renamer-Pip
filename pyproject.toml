@@ -1,8 +1,10 @@
 [project]
-name = "renamer"
+name = "batch_renamer"
 version = "1.0.0"
 description = "Command line Renamer program"
 requires-python = ">=3.8"
 
 [project.scripts]
-rename = "python_renamer.rename:main"
+rename = "python_renamer.batch_renamer:main"
+renamer = "python_renamer.batch_renamer:main"
+p_rename = "python_renamer.batch_renamer:main"

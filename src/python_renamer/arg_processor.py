@@ -36,7 +36,7 @@ def process_args(args):
   # handles file string parsing for file_types and directories
   if args.file:
     # check to handle directories being the program target
-    if args.file.lower() == "dir" or  args.file.lower() == "folder":
+    if args.file.lower() == "dir" or args.file.lower() == "directory" or  args.file.lower() == "folder":
       output["file_type"] = "directory"
     # checks to handle file(s) being the program target
     else:
