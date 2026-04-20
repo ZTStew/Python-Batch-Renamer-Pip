@@ -18,7 +18,7 @@ Second attempt at creating a bulk file renamer program intended to be easier to 
 ---
 ### Arguments:
 - `--help`: (Optional) Lists all program arguments
-- `--test`: (Optional) Declair if the application should run in test mode [0 -> production (default) | 1 -> test mode].
+- `--test`: (Optional) Declare if the application should run in test mode [0 -> production (default) | 1 -> test mode].
 - `--target` || `--phrase`: (Required) Target prhase for removal. Example: `-tg changeThis`
 - `--new`: (Required) Value replacing target phrase. Example: `-nw changeTo`.
   - To replace with nothing, type \"blank\".
