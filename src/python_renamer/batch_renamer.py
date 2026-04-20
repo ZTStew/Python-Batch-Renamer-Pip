@@ -1,7 +1,7 @@
 
 """
 Description:
-  Program takes user input to bulk rename files or folders in the given folder. Does not apply recursively
+  Program takes user input to bulk rename files or folders in the given folder. Does not apply recursively.
 
 File:
   File takes user input and feeds it to the rest of the program
@@ -41,7 +41,7 @@ def main():
     To batch rename folders/directories instead, type: `-f dir` or `-f folder`.
   """
 
-  args = argparse.ArgumentParser(description="Program searches given folder for video files and trims a specified number of seconds from the start or the end of the video. The file is then saved in a specified location.")
+  args = argparse.ArgumentParser(description="Program takes user input to bulk rename files or folders in the given folder. Does not apply recursively.")
   # command line option running program in "test" mode
   args.add_argument(
     "-t",
